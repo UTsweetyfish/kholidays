@@ -69,4 +69,6 @@ libKF5Holidays.so.5 libkf5holidays5 #MINVER#
  _ZNK9KHolidays7HolidaygtERKS0_@Base 15.07.90
  _ZNK9KHolidays7HolidayltERKS0_@Base 15.07.90
  (optional=templinst|subst)_ZNSt11_Deque_baseIiSaIiEE17_M_initialize_mapE{size_t}@Base 15.07.90
+ _ZNSt11_Deque_baseIiSaIiEED1Ev@Base 1:5.90.0
+ _ZNSt11_Deque_baseIiSaIiEED2Ev@Base 1:5.90.0
  (optional=templinst|subst)_ZNSt5dequeIiSaIiEE17_M_reallocate_mapE{size_t}b@Base 1:5.74.0
