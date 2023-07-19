@@ -11,6 +11,8 @@
 
 #include "kholidays_export.h"
 
+#include <qobjectdefs.h>
+
 class QDate;
 class QString;
 
@@ -29,17 +31,20 @@ namespace KHolidays
             Ramadan will begin is not known in advance. In Saudi Arabia,
             observers are sent up in airplanes if the weather is cloudy
             when the new moon is expected.
+   + "waxing crescent": between "new" and "first quarter".
    + "first quarter": the right 50% of the moon is visible.
+   + "waxing gibbous": between "first quarter" and "full".
    + "full": the moon is fully visible.
+   + "waning gibbous": between "full" and "last quarter".
    + "last quarter": the left 50% of the moon is visible.
+   + "waning crescent": between "last quarter" and "new".
 
    A very good description of the lunar phases can be read at the Wikipedia,
      https://en.wikipedia.org/wiki/Lunar_phase
-
-   Note that crescent and gibbous phases are not currently supported.
 */
 class KHOLIDAYS_EXPORT LunarPhase // krazy:exclude=dpointer
 {
+    Q_GADGET
 public:
     /**
       Phases of the moon, in traditional English notation. The
@@ -52,7 +57,12 @@ public:
         LastQuarter, ///< Last quarter of moon phase
         FullMoon, ///< Full moon phase
         None, ///< Indication for error
+        WaxingCrescent, ///< @since 5.94
+        WaxingGibbous, ///< @since 5.94
+        WaningGibbous, ///< @since 5.94
+        WaningCrescent, ///< @since 5.94
     };
+    Q_ENUM(Phase)
 
     /**
        Return the lunar phase for the specified Gregorian date.

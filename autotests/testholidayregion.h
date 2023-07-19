@@ -20,19 +20,24 @@ class HolidayRegionTest : public QObject
 {
     Q_OBJECT
 private Q_SLOTS:
+    void testLoadFileCalendarSystems();
     void testLoadFile();
     void testGb();
     void testIran();
     void testIsrael();
     void testRegions();
     void testDefaultRegions();
+    void testSolistaleInHolidays();
+    void testLoadFileCalendarSystemsForPlasma();
 
 private:
     void printMetadata(const KHolidays::HolidayRegion &region);
     void printHolidays(const KHolidays::Holiday::List &holidays);
     void parseRegionCalendarYear(const KHolidays::HolidayRegion &region, int year, const QString &calendarType = "gregorian");
     void parseRegionDateRange(const KHolidays::HolidayRegion &region, const QDate &startDate, const QDate &endDate);
+    void parseRawRegionDateRange(const KHolidays::HolidayRegion &region, const QDate &startDate, const QDate &endDate);
     void parseRegionDate(const KHolidays::HolidayRegion &region, const QDate &date);
+    void parseRegionDateRangeCategory(const KHolidays::HolidayRegion &region, const QDate &startDate, const QDate &endDate, const QString &category);
 };
 
 #endif // TESTHOLIDAYREGION_H

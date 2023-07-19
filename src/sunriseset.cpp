@@ -176,10 +176,10 @@ static QTime calcSunEvent(const QDate &date, double latitude, double longitude, 
     double solarDec = calcSunDeclination(t);
     double hourAngle = direction * calcHourAngleSunrise(latitude, solarDec, sunHeight);
     double delta = longitude + radToDeg(hourAngle);
-    QTime timeUTC(0, 0);
     if (std::isnan(delta)) {
-        return timeUTC;
+        return {};
     }
+    QTime timeUTC(0, 0);
     timeUTC = timeUTC.addSecs((720 - (4.0 * delta) - eqTime) * 60);
 
     // round to nearest minute
@@ -207,4 +207,32 @@ QTime SunRiseSet::utcDawn(const QDate &date, double latitude, double longitude)
 QTime SunRiseSet::utcDusk(const QDate &date, double latitude, double longitude)
 {
     return calcSunEvent(date, latitude, longitude, CivilTwilight, Down);
+}
+
+// see https://en.wikipedia.org/wiki/Solar_zenith_angle
+bool SunRiseSet::isPolarDay(const QDate &date, double latitude)
+{
+    const double t = calcTimeJulianCent(date.toJulianDay());
+    const double solarDec = calcSunDeclination(t);
+    const double maxSolarZenithAngle = 180.0 - std::abs(latitude + solarDec);
+
+    return maxSolarZenithAngle <= 90.0 - Sunrise;
+}
+
+bool SunRiseSet::isPolarTwilight(const QDate &date, double latitude)
+{
+    const double t = calcTimeJulianCent(date.toJulianDay());
+    const double solarDec = calcSunDeclination(t);
+    const double minSolarZenithAngle = std::abs(latitude - solarDec);
+
+    return minSolarZenithAngle > 90.0 - Sunrise && minSolarZenithAngle <= 90.0 - CivilTwilight;
+}
+
+bool SunRiseSet::isPolarNight(const QDate &date, double latitude)
+{
+    const double t = calcTimeJulianCent(date.toJulianDay());
+    const double solarDec = calcSunDeclination(t);
+    const double minSolarZenithAngle = std::abs(latitude - solarDec);
+
+    return minSolarZenithAngle > 90.0 - CivilTwilight;
 }

@@ -1,11 +1,15 @@
 cmake_minimum_required(VERSION 3.16)
 
-set(KF_VERSION "5.90.0")
+set(KF_VERSION "5.103.0")
 project(KHolidays VERSION ${KF_VERSION})
 
-find_package(ECM 5.90.0 REQUIRED NO_MODULE)
+find_package(ECM 5.103.0 REQUIRED NO_MODULE)
 set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH})
 set(CMAKE_AUTORCC ON)
+
+include(KDEInstallDirs)
+include(KDECMakeSettings)
+include(KDEFrameworkCompilerSettings NO_POLICY_SCOPE)
 
 include(GenerateExportHeader)
 include(ECMGenerateHeaders)
@@ -13,16 +17,17 @@ include(CMakePackageConfigHelpers)
 include(ECMSetupVersion)
 include(ECMPoQmTools)
 include(FeatureSummary)
-include(KDEInstallDirs)
-include(KDECMakeSettings)
-include(KDEFrameworkCompilerSettings NO_POLICY_SCOPE)
 include(ECMCoverageOption)
 include(ECMQtDeclareLoggingCategory)
 include(ECMAddQch)
 include(ECMGeneratePriFile)
 include(KDEGitCommitHooks)
+include(ECMGenerateExportHeader)
+include(ECMDeprecationSettings)
+include(ECMQmlModule)
 
 set(KHOLIDAYS_LIB_VERSION ${KF_VERSION})
+set(EXCLUDE_DEPRECATED_BEFORE_AND_AT 0 CACHE STRING "Control the range of deprecated API excluded from the build [default=0].")
 
 ecm_setup_version(PROJECT VARIABLE_PREFIX KHOLIDAYS
                         VERSION_HEADER "${CMAKE_CURRENT_BINARY_DIR}/kholidays_version.h"
@@ -38,16 +43,18 @@ set(REQUIRED_QT_VERSION 5.15.2)
 find_package(Qt${QT_MAJOR_VERSION} ${REQUIRED_QT_VERSION} CONFIG REQUIRED Core Qml)
 
 remove_definitions(-DQT_NO_CAST_FROM_ASCII -DQT_NO_CAST_TO_ASCII)
+ecm_set_disabled_deprecation_versions(
+    QT 5.15.2
+)
 
 ########### Targets ###########
-add_definitions(-DQT_DISABLE_DEPRECATED_BEFORE=0x050f02)
 add_subdirectory(src)
 
 if(BUILD_TESTING)
   add_subdirectory(autotests)
 endif()
 
-ecm_install_po_files_as_qm(po)
+ecm_install_po_files_as_qm(poqm)
 
 ########### CMake Config Files ###########
 set(CMAKECONFIG_INSTALL_DIR "${KDE_INSTALL_CMAKEPACKAGEDIR}/KF5Holidays")
@@ -79,7 +86,7 @@ install(EXPORT KF5HolidaysTargets DESTINATION "${CMAKECONFIG_INSTALL_DIR}" FILE 
 
 install(FILES
   ${CMAKE_CURRENT_BINARY_DIR}/kholidays_version.h
-  DESTINATION ${KDE_INSTALL_INCLUDEDIR_KF} COMPONENT Devel
+  DESTINATION ${KDE_INSTALL_INCLUDEDIR_KF}/KHolidays COMPONENT Devel
 )
 
 feature_summary(WHAT ALL FATAL_ON_MISSING_REQUIRED_PACKAGES)

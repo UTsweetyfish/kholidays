@@ -3,8 +3,12 @@ libKF5Holidays.so.5 libkf5holidays5 #MINVER#
 * Build-Depends-Package: libkf5holidays-dev
  _ZN9KHolidays10LunarPhase11phaseAtDateERK5QDate@Base 15.07.90
  _ZN9KHolidays10LunarPhase15phaseNameAtDateERK5QDate@Base 15.07.90
+ _ZN9KHolidays10LunarPhase16staticMetaObjectE@Base 1:5.94.0
  _ZN9KHolidays10LunarPhase9phaseNameENS0_5PhaseE@Base 15.07.90
+ _ZN9KHolidays10SunRiseSet10isPolarDayERK5QDated@Base 1:5.97.0
  _ZN9KHolidays10SunRiseSet10utcSunriseERK5QDatedd@Base 15.07.90
+ _ZN9KHolidays10SunRiseSet12isPolarNightERK5QDated@Base 1:5.97.0
+ _ZN9KHolidays10SunRiseSet15isPolarTwilightERK5QDated@Base 1:5.97.0
  _ZN9KHolidays10SunRiseSet7utcDawnERK5QDatedd@Base 1:5.77.0
  _ZN9KHolidays10SunRiseSet7utcDuskERK5QDatedd@Base 1:5.77.0
  _ZN9KHolidays10SunRiseSet9utcSunsetERK5QDatedd@Base 15.07.90
@@ -50,7 +54,12 @@ libKF5Holidays.so.5 libkf5holidays5 #MINVER#
  _ZNK9KHolidays13HolidayRegion10regionCodeEv@Base 15.07.90
  _ZNK9KHolidays13HolidayRegion11countryCodeEv@Base 15.07.90
  _ZNK9KHolidays13HolidayRegion11descriptionEv@Base 15.07.90
+ _ZNK9KHolidays13HolidayRegion11rawHolidaysERK5QDateS3_@Base 1:5.97.0
+ _ZNK9KHolidays13HolidayRegion11rawHolidaysERK5QDateS3_RK7QString@Base 1:5.94.0
  _ZNK9KHolidays13HolidayRegion12languageCodeEv@Base 15.07.90
+ _ZNK9KHolidays13HolidayRegion27rawHolidaysWithAstroSeasonsERK5QDate@Base 1:5.94.0
+ _ZNK9KHolidays13HolidayRegion27rawHolidaysWithAstroSeasonsERK5QDateS3_@Base 1:5.94.0
+ _ZNK9KHolidays13HolidayRegion27rawHolidaysWithAstroSeasonsEi@Base 1:5.94.0
  _ZNK9KHolidays13HolidayRegion4nameEv@Base 15.07.90
  _ZNK9KHolidays13HolidayRegion7isValidEv@Base 15.07.90
  _ZNK9KHolidays13HolidayRegion8holidaysERK5QDate@Base 15.12.0

@@ -1,11 +1,3 @@
-
-include(CheckIncludeFiles)
-
-check_include_files(err.h HAVE_ERR_H)
-check_include_files(sys/cdefs.h HAVE_SYS_CDEFS_H)
-
-configure_file(config-kholidays.h.cmake ${KHolidays_BINARY_DIR}/src/config-kholidays.h)
-
 add_library(KF5Holidays)
 add_library(KF5::Holidays ALIAS KF5Holidays)
 
@@ -54,7 +46,14 @@ ecm_qt_declare_logging_category(KF5Holidays
     EXPORT KHOLIDAYS
 )
 
-generate_export_header(KF5Holidays BASE_NAME KHolidays)
+ecm_generate_export_header(KF5Holidays 
+    VERSION  ${KF_VERSION}
+    BASE_NAME KHolidays
+    GROUP_BASE_NAME KF
+    DEPRECATED_BASE_VERSION 0
+    DEPRECATION_VERSIONS 5.95
+    EXCLUDE_DEPRECATED_BEFORE_AND_AT ${EXCLUDE_DEPRECATED_BEFORE_AND_AT}
+)
 
 target_include_directories(KF5Holidays INTERFACE "$<INSTALL_INTERFACE:${KDE_INSTALL_INCLUDEDIR_KF}/KHolidays>")
 target_include_directories(KF5Holidays PUBLIC "$<BUILD_INTERFACE:${KHolidays_SOURCE_DIR}/src;${KHolidays_BINARY_DIR}/src>")
@@ -74,7 +73,7 @@ ecm_generate_headers(KHolidays_CamelCase_HEADERS
   REQUIRED_HEADERS KHolidays_HEADERS
 )
 
-install(TARGETS KF5Holidays EXPORT KF5HolidaysTargets ${KF5_INSTALL_TARGETS_DEFAULT_ARGS})
+install(TARGETS KF5Holidays EXPORT KF5HolidaysTargets ${KF_INSTALL_TARGETS_DEFAULT_ARGS})
 
 ########### install files ###############
 install(FILES
